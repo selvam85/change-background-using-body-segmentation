@@ -43,7 +43,7 @@ async function removeBackground() {
 
 //loadImage('https://cdn.pixabay.com/photo/2015/09/10/19/36/tennis-934841_1280.jpg');
 //loadImage('https://cdn.pixabay.com/photo/2021/08/26/16/58/woman-6576618_1280.jpg');
-//loadImage('http://127.0.0.1:8080/woman.jpg');
-loadImage('http://127.0.0.1:8080/tennis-forehand.jpg');
+loadImage('http://127.0.0.1:8080/woman.jpg');
+//loadImage('http://127.0.0.1:8080/tennis-forehand.jpg');
 //loadImage('http://127.0.0.1:8080/man-on-mountain.jpg');
 //loadImage('http://127.0.0.1:8080/DEV_4586.jpg');

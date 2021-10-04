@@ -28,21 +28,19 @@ function main() {
                 console.log("Error occurred while getting the video stream");
             });
     }
-
+    
     video.onloadedmetadata = () => {
         webcamCanvas.width = video.videoWidth;
         webcamCanvas.height = video.videoHeight;
         tempCanvas.width = video.videoWidth;
         tempCanvas.height = video.videoHeight;
     };
-
-    video.addEventListener("loadeddata", predict);
+    
+    video.addEventListener("loadeddata", segmentPersons);
 }
 
-function predict() {
-    
+function segmentPersons() {
     tempCanvasCtx.drawImage(video, 0, 0);
-    
     if (previousSegmentationComplete) {
         previousSegmentationComplete = false;
         // Now classify the canvas image we have available.
@@ -52,15 +50,12 @@ function predict() {
                     previousSegmentationComplete = true;
             });
     }
-
-    // Call this function again to keep predicting when the browser is ready.
-    window.requestAnimationFrame(predict);
+    //Call this function repeatedly to perform segmentation on all frames of the video.
+    window.requestAnimationFrame(segmentPersons);
 }
 
 function processSegmentation(segmentation) {
-
     var imgData = tempCanvasCtx.getImageData(0, 0, webcamCanvas.width, webcamCanvas.height);
-
     //Loop through the pixels in the image
     for(let i = 0; i < imgData.data.length; i+=4) {
         let pixelIndex = i/4;
@@ -70,7 +65,6 @@ function processSegmentation(segmentation) {
           imgData.data[i + 3] = 0;
         }
       }
-  
       //Draw the updated image on the canvas
       webcamCanvasCtx.putImageData(imgData, 0, 0);
 }
