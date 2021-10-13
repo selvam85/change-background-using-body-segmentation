@@ -2,8 +2,8 @@ const img = document.getElementById('image');
 const canvas = document.getElementById('canvas');
 
 function loadImage(imageURL) {
+    img.onload = removeBackground;  
     img.src = imageURL;
-    img.onload = removeBackground;
 }
 
 async function removeBackground() {
